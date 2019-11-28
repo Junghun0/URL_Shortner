@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+export const a = "asd"
+
 function Result() {
   const classes = useStyles();
   const [result, setResult] = useState('Test result state');
