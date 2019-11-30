@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.junghoon.spring.urlshortner.mapper.ShortnerMapper">
+
+    <insert id="insertData" parameterType="com.junghoon.spring.urlshortner.model.UrlData">
+        INSERT INTO urldata (idx, originUrl, shortenUrl) VALUES ( #{idx}, #{originUrl}, #{shortenUrl})
+    </insert>
+
+<!--select EXISTS (select * from 테이블이름 where 컬럼=찾는 값) as success;-->
+    <select id="existUrl" parameterType="java.lang.String" resultType="Integer">
+        SELECT EXISTS (select * from urldata where #{shortenUrl} ) as success;
+    </select>
+
+<!--    public String getBaseUrl(String shortenUrl);-->
+    <select id="getBaseUrl" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT (originUrl) from urldata where shortenUrl = #{shortenUrl};
+    </select>
+
+    <select id="getShortenUrl" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT (shortenUrl) from urldata where originUrl = #{originUrl};
+    </select>
+
+    <select id="getMaxIndex" resultType="java.lang.Integer">
+        select MAX(idx) from urldata;
+    </select>
+
+    <select id="isEmptyTable" resultType="java.lang.Integer">
+        select exists (select idx from urldata)
+    </select>
+</mapper>

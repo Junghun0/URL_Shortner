@@ -34,23 +34,27 @@ const theme = createMuiTheme({
   }
 });
 
-function Shortner() {
+function Shortner({changeResult}) {
   const classes = useStyles();
 
   const [sendUrl, setSendUrl] = useState("default");
   const [responseUrl, setResponseUrl] = useState("default");
 
   useEffect(() => {
-    console.log(sendUrl);
+    console.log("sendUrl-> ",sendUrl);
   }, [sendUrl]);
 
+  useEffect(() => {
+    console.log("responseUrl-> ",responseUrl);
+  }, [responseUrl]);
+  
   //버튼 클릭 이벤트
   function sendRequest() {
 
     Axios.get(`/url/${sendUrl}`)
     .then(response => {
       setResponseUrl(response);
-      console.log(response.data);
+      changeResult(response.data.resultUrl)
     })
     .catch(err => {console.log(err)});
 
