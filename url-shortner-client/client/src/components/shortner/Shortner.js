@@ -34,6 +34,7 @@ const theme = createMuiTheme({
   }
 });
 
+
 function Shortner({changeResult}) {
   const classes = useStyles();
 
@@ -50,7 +51,7 @@ function Shortner({changeResult}) {
   
   //버튼 클릭 이벤트
   function sendRequest() {
-
+    console.log('senrequest function called')
     Axios.get(`/url/${sendUrl}`)
     .then(response => {
       setResponseUrl(response);
@@ -62,6 +63,7 @@ function Shortner({changeResult}) {
 
   //텍스트필드 입력받기
   function onTextFieldChange(e) {
+    console.log(e.target.value)
     setSendUrl(e.target.value);
   };
 

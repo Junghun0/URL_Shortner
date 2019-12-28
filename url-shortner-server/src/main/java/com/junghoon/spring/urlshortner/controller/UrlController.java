@@ -3,6 +3,7 @@ package com.junghoon.spring.urlshortner.controller;
 import com.junghoon.spring.urlshortner.model.ResponseUrl;
 import com.junghoon.spring.urlshortner.model.UrlData;
 import com.junghoon.spring.urlshortner.service.UrlService;
+import com.sun.media.jfxmedia.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class UrlController {
     @GetMapping("url/{requestUrl}")
     public ResponseEntity<ResponseUrl> shortenUrl(@PathVariable("requestUrl") String requestUrl ) {
         ResponseUrl responseUrl = new ResponseUrl();
+        System.out.println("call-> "+requestUrl);
         if (urlService.isValidUrl(requestUrl)){ // 유효한 주소 받을 때
             Integer index = 0;
 
